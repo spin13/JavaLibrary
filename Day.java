@@ -1,7 +1,7 @@
-
 import java.util.Scanner;
-class Func{
-    public int dayspent(int mo1,int da1,int mo2,int da2){
+
+public class Day{
+    static int dayspent(int mo1,int da1,int mo2,int da2){
 
         int[] max={0,31,29,31,30,31,30,31,31,30,31,30,31};
         int a=0;
@@ -25,15 +25,30 @@ class Func{
             return a+1;
         }
     }
-}
 
-public class Day{
+
+    /* Zeller rule
+     * returns -
+     *     0: Sunday
+     *     1: Monday
+     *     2: Tuesday
+     *     3: Wednesday
+     *     4: Thursday
+     *     5: Friday
+     *     6: Saturday
+     */
+    static int zeller(int y, int m, int d){
+        if(m <= 2){
+            y--;
+            m += 12;
+        }
+        return (y + y/4 - y/100 + y/400 + (13 * m + 8)/5 + d) % 7;
+    }
+
     public static void main(String[] args){
         Scanner sc=new Scanner(System.in);
 
-        Func fu=new Func();
-
-        int da=fu.dayspent(1,20,2,13);
-        System.out.println(da);
+        //int da=dayspent(1,20,2,13);
+        System.out.println(zeller(2016, 6, 26));
     }
 }
